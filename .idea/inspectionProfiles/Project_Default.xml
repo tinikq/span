@@ -1,0 +1,45 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyArgumentListInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="15">
+            <item index="0" class="java.lang.String" itemvalue="BEEGEEK" />
+            <item index="1" class="java.lang.String" itemvalue="beegeek123" />
+            <item index="2" class="java.lang.String" itemvalue="BeeGeek" />
+            <item index="3" class="java.lang.String" itemvalue="abcBeegeek" />
+            <item index="4" class="java.lang.String" itemvalue="beegeekabc" />
+            <item index="5" class="java.lang.String" itemvalue="123beegeeK" />
+            <item index="6" class="java.lang.String" itemvalue="12345beeGeek123456" />
+            <item index="7" class="java.lang.String" itemvalue="Beegeek" />
+            <item index="8" class="java.lang.String" itemvalue="beegek" />
+            <item index="9" class="java.lang.String" itemvalue="BeEgEeK" />
+            <item index="10" class="java.lang.String" itemvalue="beebeegeekgeek" />
+            <item index="11" class="java.lang.String" itemvalue="bbeeggeekk" />
+            <item index="12" class="java.lang.String" itemvalue="abcdbeeGeekbcdfg" />
+            <item index="13" class="java.lang.String" itemvalue="beegeek" />
+            <item index="14" class="java.lang.String" itemvalue="begeek" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W292" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyRedeclarationInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PySimplifyBooleanCheckInspection" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="list.__mod__" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
