@@ -1,4 +1,3 @@
-import json
 from datetime import date, datetime
 
 from selenium.webdriver.common.by import By
@@ -12,14 +11,6 @@ import sqlite3
 
 
 def parse_matches(data: str, sport_country: str) -> list[tuple]:
-    # Чтение JSON файла
-    with open('sports.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-
-    # Преобразование в список
-    ursl = {(sport, country): url for sport, countries in data.items() for country, url in countries.items()}
-
-    print(sports_list)
     pattern = re.compile(r"(\d{2}/\d{2})\s+(\d{2}:\d{2})\n([А-Яа-я\s]+)\n([А-Яа-я\s]+)(?:\nМатч.*)?\n([\d,. \-+]+)")
     matches = []
     year = datetime.now().strftime('%Y-')
@@ -39,19 +30,38 @@ def parse_matches(data: str, sport_country: str) -> list[tuple]:
     return matches
 
 
-def parser_football():
-    # Чтение JSON файла c ссылками
-    with open('urls/zenit_urls.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
+def parser_SE():
+    url = 'https://www.sport-express.ru/stavki-na-sport/'
 
-    # Преобразование в список
-    urls = {(sport, country): url for sport, countries in data.items() for country, url in countries.items()}
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
+    options = Options()
+    # options.add_argument('--headless')
+    options.add_argument(f'user-agent={user_agent}')
+    driver = webdriver.Firefox(options=options)
+    driver.get(url)  # открываем страницу
+    wait = WebDriverWait(driver, 100)  # ожидание загрузки страницы
+    # elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "g-tr")))
+
+
+def parser_zenit():
+    urls = {
+        ('Футбол', 'Россия'): 'https://zenit.win/line/football/r_11_russia',
+        ('Футбол', 'Англия'): 'https://zenit.win/line/football/r_37_england',
+        ('Футбол', 'Германия'): 'https://zenit.win/line/football/r_41_germany',
+        ('Футбол', 'Испания'): 'https://zenit.win/line/football/r_40_spain',
+        ('Футбол', 'Италия'): 'https://zenit.win/line/football/r_43_italy',
+        ('Футбол', 'Франция'): 'https://zenit.win/line/football/r_45_france',
+        ('Баскетбол', 'Россия'): 'https://zenit.win/line/basketball/r_10_russia',
+        ('Баскетбол', 'США'): 'https://zenit.win/line/basketball/r_9_usa',
+        ('Хоккей', 'Россия'): 'https://zenit.win/line/ice-hockey/r_32_russia',
+        ('Хоккей', 'Германия'): 'https://zenit.win/line/ice-hockey/r_355_germany',
+        ('Хоккей', 'США'): 'https://zenit.win/line/ice-hockey/r_12_usa'}
 
     # настройка драйвера, добавляем фейковый юзер агент
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
     options = Options()
-    options.add_argument('--headless')
-    # options.add_argument(f'user-agent={user_agent}')
+    # options.add_argument('--headless')
+    options.add_argument(f'user-agent={user_agent}')
     driver = webdriver.Firefox(options=options)
 
     try:
@@ -94,7 +104,7 @@ def db_record():
                             sport TEXT,
                             country TEXT)''')
 
-        for data in parser_football():
+        for data in parser_zenit():
             cursor.executemany(f'''INSERT INTO "{today}"
             (date, time_start, team1, team2, W1, X, W2, H1, HV1, H2, HV2, M, total, B, extra, sport, country)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', data)

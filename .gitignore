@@ -1,0 +1,41 @@
+# Базовые системные файлы
+*.log
+*.tmp
+*.swp
+.DS_Store
+.idea/
+.vscode/
+
+# Файлы и папки виртуального окружения
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Конфиденциальные файлы окружения
+.env
+*.key
+*.pem
+
+# Библиотеки и пакеты
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# Кэш тестирования
+.tox/
+.cache/
+.coverage
+*.cover
+.hypothesis/
+
+# Лог-файлы тестов
+nosetests.xml
+coverage.xml
+*.cover
+*.spec
+
+# Docker
+docker-compose.override.yml
