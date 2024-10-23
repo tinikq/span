@@ -1,31 +1,24 @@
 import json
-from datetime import date, datetime
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.wait import WebDriverWait
-
 import re
 import sqlite3
+from datetime import date, datetime
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 def parse_matches(data: str, sport_country: str) -> list[tuple]:
-    # Чтение JSON файла
-    with open('sports.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-
-    # Преобразование в список
-    ursl = {(sport, country): url for sport, countries in data.items() for country, url in countries.items()}
-
-    print(sports_list)
     pattern = re.compile(r"(\d{2}/\d{2})\s+(\d{2}:\d{2})\n([А-Яа-я\s]+)\n([А-Яа-я\s]+)(?:\nМатч.*)?\n([\d,. \-+]+)")
     matches = []
     year = datetime.now().strftime('%Y-')
 
     for match in pattern.findall(data):
-        date = year + match[0][::-1].replace('/', '-', 1)[::-1]
+        date_match = year + '-'.join(match[0].split('/')[::-1])
+        if date_match != date.today().strftime('%Y-%m-%d'):
+            continue
         time = match[1]
         team1 = match[2].strip()
         team2 = match[3].strip()
@@ -34,7 +27,7 @@ def parse_matches(data: str, sport_country: str) -> list[tuple]:
             odds.insert(1, 0)
         elif len(odds) == 8:
             odds = [0, 0, 0] + odds
-        matches.append((date, time, team1, team2, *odds, *sport_country))
+        matches.append((time, team1, team2, *odds, *sport_country))
 
     return matches
 
@@ -50,8 +43,8 @@ def parser_football():
     # настройка драйвера, добавляем фейковый юзер агент
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
     options = Options()
-    options.add_argument('--headless')
-    # options.add_argument(f'user-agent={user_agent}')
+    # options.add_argument('--headless')
+    options.add_argument(f'user-agent={user_agent}')
     driver = webdriver.Firefox(options=options)
 
     try:
@@ -76,7 +69,6 @@ def db_record():
         today = date.today().strftime('%Y%m%d')
         cursor.execute(f'''CREATE TABLE IF NOT EXISTS "{today}" (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            date DATE,
                             time_start TIME,
                             team1 TEXT,
                             team2 TEXT,
@@ -96,10 +88,9 @@ def db_record():
 
         for data in parser_football():
             cursor.executemany(f'''INSERT INTO "{today}"
-            (date, time_start, team1, team2, W1, X, W2, H1, HV1, H2, HV2, M, total, B, extra, sport, country)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', data)
+            (time_start, team1, team2, W1, X, W2, H1, HV1, H2, HV2, M, total, B, extra, sport, country)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', data)
             db.commit()  # записываем данные в базу
-
 
 
 def main():
