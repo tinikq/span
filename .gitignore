@@ -1,0 +1,55 @@
+# Системные файлы
+*.log
+*.tmp
+*.swp
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+
+# Тестовые и отладочные файлы
+test.py
+test.html
+отладка.py
+
+# База данных
+*.db
+*.sqlite3
+data_bet_old.db
+data_bet.db
+
+# Кэш и временные файлы
+.ipynb_checkpoints/
+.tox/
+.coverage
+.cache/
+*.cover
+.hypothesis/
+
+# Сборка и дистрибуция
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# Отчеты тестов
+nosetests.xml
+coverage.xml
+
+# Docker
+docker-compose.override.yml
+
+# НЕ игнорировать
+!urls/zenit_urls.json
+!urls/zenit_urls_old.json
+
+
