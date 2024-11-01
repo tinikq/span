@@ -19,10 +19,6 @@ venv/
 logs/
 *.log
 
-# Database
-*.db
-*.sqlite3
-
 # Временные файлы
 *.tmp
 .DS_Store

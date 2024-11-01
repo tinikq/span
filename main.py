@@ -22,6 +22,7 @@ class WebDriver:
     def __init__(self):
         options = Options()
         options.add_argument(f"user-agent={UserAgent().random}")
+        options.add_argument("--headless") # браузер без графического интерфейса
         options.set_preference("security.ssl.enable_ocsp_stapling", False)
         options.set_preference("security.ssl.enable_ocsp_must_staple", False)
         options.set_preference("security.ssl.errorReporting.automatic", False)
