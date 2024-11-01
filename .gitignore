@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+*.sqlite3
+
+# Временные файлы
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Тестовые файлы
+test*.py
+test*.html
+отладка.py
+
+# НЕ игнорировать
+!data_bet.db
+!urls/
+!urls/zenit_urls.json
+!urls/zenit_urls_old.json
+!config.py
+!models.py
+!logger.py
+!main.py
+!README.md
+
+
