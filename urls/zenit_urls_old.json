@@ -1,0 +1,19 @@
+{
+  "Футбол": {
+    "Россия": "https://zenit.win/line/football/r_11_russia",
+    "Англия": "https://zenit.win/line/football/r_37_england",
+    "Германия": "https://zenit.win/line/football/r_41_germany",
+    "Испания": "https://zenit.win/line/football/r_40_spain",
+    "Италия": "https://zenit.win/line/football/r_43_italy",
+    "Франция": "https://zenit.win/line/football/r_45_france"
+  },
+  "Баскетбол": {
+    "Россия": "https://zenit.win/line/basketball/r_10_russia",
+    "США": "https://zenit.win/line/basketball/r_9_usa"
+  },
+  "Хоккей": {
+    "Россия": "https://zenit.win/line/ice-hockey/r_32_russia",
+    "Германия": "https://zenit.win/line/ice-hockey/r_355_germany",
+    "США": "https://zenit.win/line/ice-hockey/r_12_usa"
+  }
+}
