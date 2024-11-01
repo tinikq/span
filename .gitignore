@@ -22,8 +22,6 @@ logs/
 # Database
 *.db
 *.sqlite3
-data_bet.db
-data_bet_old.db
 
 # Временные файлы
 *.tmp
@@ -36,13 +34,14 @@ test*.html
 отладка.py
 
 # НЕ игнорировать
+!data_bet.db
 !urls/
 !urls/zenit_urls.json
 !urls/zenit_urls_old.json
 !config.py
 !models.py
 !logger.py
-!новый функцианал.py
+!main.py
 !README.md
 
 
